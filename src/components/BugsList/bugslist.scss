@@ -1,0 +1,114 @@
+.card-container {
+  margin: 0 auto;
+  padding: 4rem 1rem;
+  color: white;
+  width: 100%;
+  /* desctop */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+.card-container .card-header {
+}
+.priority {
+  margin-right: 6px;
+}
+.card-container .bug-priority.low {
+  background-color: var(--color-low);
+}
+.card-container .bug-priority.normal {
+  background-color: var(--color-normal);
+}
+.card-container .bug-priority.critical {
+  background-color: var(--color-critical);
+}
+.card-container .bug-priority.solved {
+  background-color: var(--color-solved);
+  /* border: 1px solid black; */
+}
+.card-container .btn.solved {
+  background-color: var(--color-solved);
+  box-shadow: 0px 0px 5px black;
+  color: hsl(122, 100%, 50%);
+}
+.bug-card {
+  box-shadow: 0 0 10px hsla(0, 0%, 2%, 0.6);
+  position: relative;
+  text-align: left;
+}
+.card-container .btn.btn-delete {
+  position: absolute;
+  right: .5rem;
+  top: .5rem;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 0 2rem;
+  /* margin: 0 auto; */
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  padding: .5rem;
+}
+select {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0069d9;
+}
+
+.bug-card {
+  width: clamp(300px, 450px, 50%);
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.bug-card h2 {
+  margin: 2rem;
+  margin-left: 0;
+}
+
+.bug-card p {
+  margin-bottom: 5px;
+}
+
+.bug-card button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #dc3545;
+  color: #fff;
+  cursor: pointer;
+}
+
+.bug-card button:hover {
+  background-color: #c82333;
+}
+
+.submit__button {
+  display: grid;
+  grid-template-columns: repeat(4fr, 1);
+  gap: 10px;
+}

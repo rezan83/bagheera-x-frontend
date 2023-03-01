@@ -1,0 +1,51 @@
+.bug-form {
+  border: 1px solid gray;
+  padding: 2rem;
+  margin: 5rem auto;
+  width: clamp(15rem, 450px, 100%);
+  color: hsl(0, 0%, 50%);
+}
+
+/* to be used later */
+@keyframes not-valid {
+  0% {
+    transform: translateX(0.2rem);
+  }
+
+  50% {
+    transform: translateX(-0.2rem);
+  }
+
+  75% {
+    transform: translateX(-0.2rem);
+  }
+
+  100% {
+    transform: translateX(+0.2rem);
+  }
+}
+
+.bug-form,
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form-group {
+  /* margin: 1rem 0; */
+  label {
+    margin: 0.5rem 0;
+  }
+}
+
+.btn-report {
+  margin-top: 1rem;
+  transition: 0.5s;
+}
+
+.report-success {
+  background-color: green;
+  box-shadow: 1px 1px 20px hsl(84, 100%, 59%);
+  transform: translateY(1rem);
+}

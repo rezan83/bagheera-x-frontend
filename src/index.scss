@@ -1,0 +1,65 @@
+:root {
+  --color-low: hsl(63, 62%, 31%);
+  --color-normal: hsl(198, 100%, 43%);
+  --color-critical: hsl(271, 76%, 53%);
+  --color-solved: hsl(0, 0%, 60%);
+  --color-main-nav: hsl(216, 98%, 52%);
+  --color-main-bg: hsl(253, 100%, 5%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--color-main-bg);
+}
+
+body {
+  scroll-behavior: smooth;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  color: white; /* margin-top: 50px; */
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* background-color:black */
+}
+
+h2 {
+  &.search-page-header {
+    margin: 3rem 0;
+  }
+}
+
+.loading {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  height: 100vh;
+  width: 100vw; /* background-color: black; */
+  display: grid;
+  place-items: center;
+
+  img {
+    /* color: white; */
+    width: 50vw;
+  }
+}
+
+button {
+  cursor: pointer;
+  padding: 0.5rem;
+}

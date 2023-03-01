@@ -1,0 +1,14 @@
+.charts-container {
+  /* margin-top: 3rem; */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.charts {
+  padding: 1rem; /* width: 90vw; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
