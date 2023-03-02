@@ -1,9 +1,8 @@
 import React, { FC, ReactNode } from 'react';
+import { IChildren } from '../../interfaces';
 import './charts.scss';
-interface IProps {
-  children: ReactNode;
-}
-const Charts: FC<IProps> = ({ children }) => {
+
+const Charts: FC<IChildren> = ({ children }) => {
   return (
     <div className="charts-container">
       <h2>Issues Tracking State</h2>

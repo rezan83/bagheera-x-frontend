@@ -7,7 +7,7 @@ export const useFetchAllBugs = () => {
   const [fetchingState, setFetchingState] = useState({
     isLoading: true,
     isError: false,
-    isReady: false
+    isReady: false,
   });
 
   // might not work 500 req/day
@@ -22,18 +22,18 @@ export const useFetchAllBugs = () => {
   // responsible of fetching data
   useEffect(() => {
     fetch(URL)
-      .then(res => {
+      .then((res) => {
         if (!res.ok) {
           setFetchingState({ ...fetchingState, isLoading: false, isError: true });
           throw new Error('could not fetch data, please try again later');
         }
         return res.json();
       })
-      .then(data => {
+      .then((data) => {
         setFetchingState({ isReady: !!data.length, isLoading: false, isError: false });
         setBugsDataState(data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
 
@@ -43,6 +43,6 @@ export const useFetchAllBugs = () => {
   return {
     fetchingState,
     bugsDataState,
-    setBugsDataState
+    setBugsDataState,
   };
 };

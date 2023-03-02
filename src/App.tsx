@@ -22,34 +22,28 @@ import useFilterSortState from './hooks/useFilterSortState';
 function App() {
   const { fetchingState, setBugsDataState, bugsDataState } = useFetchAllBugs();
 
-  const { bugsFilter, setBugsFilter, bugsFilterDataState, setBugsFilterDataState } =
-    useFilterSortState(bugsDataState);
+  const { bugsFilter, setBugsFilter, bugsFilterDataState, setBugsFilterDataState } = useFilterSortState(bugsDataState);
   const { priorityData, solvedCount, solvedBy } = usePopulateCharts(bugsDataState);
-  const { searchGlobalQuery, setSearchGlobalQuery, bugsDataSearch, setBugsDataSearch } =
-    useSearchState(bugsDataState);
+  const { searchGlobalQuery, setSearchGlobalQuery, bugsDataSearch, setBugsDataSearch } = useSearchState(bugsDataState);
 
   const handleGlobalChange = (editedBug: IBug) => {
-    setBugsDataState(
-      bugsDataState.map(bug => (bug.id === editedBug.id ? { ...bug, ...editedBug } : bug))
-    );
+    setBugsDataState(bugsDataState.map((bug) => (bug.id === editedBug.id ? { ...bug, ...editedBug } : bug)));
     if (searchGlobalQuery) {
-      setBugsDataSearch(
-        bugsDataSearch.map(bug => (bug.id === editedBug.id ? { ...bug, ...editedBug } : bug))
-      );
+      setBugsDataSearch(bugsDataSearch.map((bug) => (bug.id === editedBug.id ? { ...bug, ...editedBug } : bug)));
     }
     if (bugsFilter.set) {
       setBugsFilterDataState(
-        bugsFilterDataState.map(bug => (bug.id === editedBug.id ? { ...bug, ...editedBug } : bug))
+        bugsFilterDataState.map((bug) => (bug.id === editedBug.id ? { ...bug, ...editedBug } : bug)),
       );
     }
   };
   const handleDeleteBug = (id: string) => {
-    setBugsDataState(bugsDataState.filter(bug => bug.id !== id));
+    setBugsDataState(bugsDataState.filter((bug) => bug.id !== id));
     if (searchGlobalQuery) {
-      setBugsDataSearch(bugsDataSearch.filter(bug => bug.id !== id));
+      setBugsDataSearch(bugsDataSearch.filter((bug) => bug.id !== id));
     }
     if (bugsFilter.set) {
-      setBugsFilterDataState(bugsFilterDataState.filter(bug => bug.id !== id));
+      setBugsFilterDataState(bugsFilterDataState.filter((bug) => bug.id !== id));
     }
   };
   return (
@@ -80,7 +74,7 @@ function App() {
                 handleDeleteBug,
                 bugsFilter,
                 setBugsFilter,
-                bugsFilterDataState
+                bugsFilterDataState,
               }}
             />
           }
@@ -95,7 +89,7 @@ function App() {
                 handleGlobalChange,
                 handleDeleteBug,
                 searchGlobalQuery,
-                bugsDataSearch
+                bugsDataSearch,
               }}
             />
           }

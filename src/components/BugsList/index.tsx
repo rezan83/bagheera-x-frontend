@@ -7,23 +7,18 @@ interface IProps {
   handleDeleteBug: (id: string) => void;
   handleGlobalChange: (editedBug: IBug) => void;
 }
-const BugsList: FC<IProps> = ({ bugsDataState, handleGlobalChange, handleDeleteBug }) =>{
+const BugsList: FC<IProps> = ({ bugsDataState, handleGlobalChange, handleDeleteBug }) => {
   return (
     <div className="card-container">
       {/* <h1>Bugs</h1> */}
 
-      {bugsDataState.map(bug => {
+      {bugsDataState.map((bug) => {
         return (
-          <BugCard
-            bug={bug}
-            handleDeleteBug={handleDeleteBug}
-            handleGlobalChange={handleGlobalChange}
-            key={bug.id}
-          />
+          <BugCard bug={bug} handleDeleteBug={handleDeleteBug} handleGlobalChange={handleGlobalChange} key={bug.id} />
         );
       })}
     </div>
   );
-}
+};
 
 export default BugsList;

@@ -13,11 +13,11 @@ export const useSearchState = (bugsDataState: IBug[]) => {
       // search title, description and assignee
       setBugsDataSearch(
         bugsDataState.filter(
-          bug =>
+          (bug) =>
             bug.title.toLowerCase().includes(searchGlobalQuery.toLowerCase()) ||
             bug.description.toLowerCase().includes(searchGlobalQuery.toLowerCase()) ||
-            bug.assignee.toLowerCase().includes(searchGlobalQuery.toLowerCase())
-        )
+            bug.assignee.toLowerCase().includes(searchGlobalQuery.toLowerCase()),
+        ),
       );
     }
 

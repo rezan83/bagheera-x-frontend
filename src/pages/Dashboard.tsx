@@ -4,14 +4,15 @@ import BugsPriorityPie from '../components/Charts/BugsPriorityPie';
 import BugsSolvedPie from '../components/Charts/BugsSolvedPie';
 import BugsSolvedByAssigneeBar from '../components/Charts/BugsSolvedByAssigneeBar';
 
-const Dashboard:FC<any> = ({ priorityData, solvedCount, solvedBy }) => {
-  return (
-    <Charts>
-      <BugsPriorityPie priorityData={priorityData} />
-      <BugsSolvedPie solvedCount={solvedCount} />
-      <BugsSolvedByAssigneeBar solvedBy={solvedBy} />
-    </Charts>
-  );
-};
+
+const Dashboard: FC<any> = ({ solvedCount, solvedBy, priorityData }) => (
+  <Charts>
+    
+    <BugsPriorityPie priorityData={priorityData}/>
+
+    <BugsSolvedPie solvedCount={solvedCount} />
+    <BugsSolvedByAssigneeBar solvedBy={solvedBy} />
+  </Charts>
+);
 
 export default Dashboard;

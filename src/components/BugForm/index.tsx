@@ -3,10 +3,10 @@ import { IBug } from '../../interfaces';
 import './bugform.scss';
 
 interface IProps {
-  bugsDataState: IBug[],
-  setBugsDataState: React.Dispatch<React.SetStateAction<IBug[]>>
+  bugsDataState: IBug[];
+  setBugsDataState: React.Dispatch<React.SetStateAction<IBug[]>>;
 }
-const BugForm:FC<IProps> = ({ bugsDataState, setBugsDataState }) => {
+const BugForm: FC<IProps> = ({ bugsDataState, setBugsDataState }) => {
   const [reportSuccess, setReportSuccess] = useState(false);
   const [newBug, setNewBug] = useState({
     id: '0',
@@ -15,10 +15,10 @@ const BugForm:FC<IProps> = ({ bugsDataState, setBugsDataState }) => {
     priority: 1,
     solved: false,
     reporter: '',
-    assignee: ''
+    assignee: '',
   });
 
-  const handleReportBug = (event: { preventDefault: () => void; }) => {
+  const handleReportBug = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     const id = Math.random() + '';
     if (newBug.assignee === '') {
@@ -33,13 +33,13 @@ const BugForm:FC<IProps> = ({ bugsDataState, setBugsDataState }) => {
       priority: 1,
       solved: false,
       reporter: '',
-      assignee: ''
+      assignee: '',
     });
 
     setReportSuccess(true);
     setTimeout(() => setReportSuccess(false), 1000);
   };
-  const handleChange = (event: { target: { name: any; value: any; }; }) => {
+  const handleChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
     setNewBug({ ...newBug, [name]: value });
   };
@@ -48,14 +48,7 @@ const BugForm:FC<IProps> = ({ bugsDataState, setBugsDataState }) => {
     <form className="bug-form" onSubmit={handleReportBug}>
       <div className="form-group">
         <label>Title</label>
-        <input
-          type="text"
-          name="title"
-          id="title"
-          value={newBug.title}
-          onChange={handleChange}
-          required
-        />
+        <input type="text" name="title" id="title" value={newBug.title} onChange={handleChange} required />
       </div>
 
       <div className="form-group">
@@ -71,14 +64,7 @@ const BugForm:FC<IProps> = ({ bugsDataState, setBugsDataState }) => {
       </div>
       <div className="form-group">
         <label>Reporter</label>
-        <input
-          type="text"
-          name="reporter"
-          id="reporter"
-          value={newBug.reporter}
-          onChange={handleChange}
-          required
-        />
+        <input type="text" name="reporter" id="reporter" value={newBug.reporter} onChange={handleChange} required />
       </div>
       <div className="form-group">
         <label>Assignee</label>

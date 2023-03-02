@@ -21,23 +21,14 @@ const BugCard: FC<IProps> = ({ bug, handleDeleteBug, handleGlobalChange }) => {
     handleGlobalChange({ ...bug, [eventName]: eventValue });
   };
   return (
-    <div
-      className={`bug-card bug-priority ${getPriorityName(bug.priority)}  ${
-        bug.solved ? 'solved' : ''
-      }`}>
+    <div className={`bug-card bug-priority ${getPriorityName(bug.priority)}  ${bug.solved ? 'solved' : ''}`}>
       <header className="card-header">
         <h2>{bug.title}</h2>
       </header>
       <p>{bug.description}</p>
       <div className="submit__button">
         <label htmlFor="assignee">Assignee:</label>
-        <input
-          type="text"
-          id="assignee"
-          name="assignee"
-          value={bug.assignee}
-          onChange={handleLocalChange}
-        />
+        <input type="text" id="assignee" name="assignee" value={bug.assignee} onChange={handleLocalChange} />
 
         <label htmlFor="priority">Priority:</label>
         <select id="priority" name="priority" value={bug.priority} onChange={handleLocalChange}>

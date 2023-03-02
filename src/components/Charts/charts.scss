@@ -2,13 +2,19 @@
   /* margin-top: 3rem; */
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  // gap: 1rem;
 }
 
 .charts {
-  padding: 1rem; /* width: 90vw; */
+  // padding: 1rem; /* width: 90vw; */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  margin-top: 2rem;
+  // gap: 1rem;
+}
+
+.chart-container {
+  width: 400px;
+  height: 400px;
 }

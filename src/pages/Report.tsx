@@ -3,14 +3,14 @@ import BugForm from '../components/BugForm';
 import BugsList from '../components/BugsList';
 import SortAndFilter from '../components/SortAndFilter';
 
-const Report:FC<any> = ({
+const Report: FC<any> = ({
   bugsDataState,
   setBugsDataState,
   handleGlobalChange,
   handleDeleteBug,
   bugsFilter,
   setBugsFilter,
-  bugsFilterDataState
+  bugsFilterDataState,
 }) => {
   return (
     <>

@@ -16,17 +16,17 @@ interface IProps {
 }
 const SortAndFilter: FC<IProps> = ({ bugsFilter, setBugsFilter }) => {
   const handelShowSolved = () => {
-    setBugsFilter(bugsFilter => ({
+    setBugsFilter((bugsFilter) => ({
       ...bugsFilter,
       showSolved: !bugsFilter.showSolved,
-      set: true
+      set: true,
     }));
   };
   const handelSortPriority = () => {
-    setBugsFilter(bugsFilter => ({
+    setBugsFilter((bugsFilter) => ({
       ...bugsFilter,
       sortPriority: -bugsFilter.sortPriority,
-      set: true
+      set: true,
     }));
   };
   const handelFilterReset = () => {

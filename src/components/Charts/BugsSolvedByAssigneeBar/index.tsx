@@ -1,56 +1,61 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Bar } from '@ant-design/plots';
+import React,{ FC }  from 'react';
+import ChartContainer from '../ChartContainer';
+import ReactECharts from 'echarts-for-react';
 
 interface IProps {
   solvedBy: { userName: string; solved: number; pending: number }[];
 }
-type IAccu = { assignee: string; value: number; type: string }[];
-
 const BugsSolvedByAssigneeBar: FC<IProps> = ({ solvedBy }) => {
-  const IBar: any = Bar;
-  const data = solvedBy.reduce((accu: IAccu, user) => {
-    const newAccu = [...accu];
-    if (user.solved)
-      newAccu.push({ assignee: user.userName, value: user.solved, type: 'solved' });
-    if (user.pending)
-      newAccu.push({ assignee: user.userName, value: user.pending, type: 'pending' });
-
-    return newAccu;
-  }, []);
-  console.log(data);
-  const config = {
-    data: data,
-    isStack: true,
-    xField: 'value',
-    yField: 'assignee',
-    seriesField: 'type',
-    theme: {
-      // 'dark',{
-      colors10: ['green', 'purple']
-    } as const,
-    legend: {
-      position: 'bottom'
+  const option = {
+    title: {
+      text: 'Solved by Assignee',
+      textStyle: {
+        color: '#ccc',
+      },
     },
-    label: {
-      // label
-      position: 'middle',
-      // 'left', 'middle', 'right'
-
-      layout: [
-        {
-          type: 'interval-adjust-position'
-        },
-        {
-          type: 'interval-hide-overlap'
-        },
-        {
-          type: 'adjust-color'
-        }
-      ]
-    } as const
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow',
+      },
+    },
+    color: ['green', 'purple'],
+    legend: {
+      right: '0',
+      top: '0',
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true,
+    },
+    xAxis: {
+      type: 'value',
+      boundaryGap: [0, 0.01],
+    },
+    yAxis: {
+      type: 'category',
+      data: solvedBy.map((assignee) => assignee.userName),
+    },
+    series: [
+      {
+        name: 'Solved',
+        type: 'bar',
+        data: solvedBy.map((assignee) => assignee.solved),
+      },
+      {
+        name: 'Pending',
+        type: 'bar',
+        data: solvedBy.map((assignee) => assignee.pending),
+      },
+    ],
   };
-  return <IBar {...config} />;
-};
 
+  return (
+    <ChartContainer>
+      <ReactECharts option={option} />
+    </ChartContainer>
+  );
+};
 export default BugsSolvedByAssigneeBar;

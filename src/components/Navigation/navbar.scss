@@ -1,3 +1,4 @@
+@import './../../styles/vars';
 .main-nav {
   background-color: var(--color-main-nav);
   position: fixed;
@@ -5,11 +6,15 @@
   left: 0;
   z-index: 999;
   width: 100%;
+  height: $nav-height;
+  display: flex;
+  align-items: center;
 
   .container {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    width: 100%;
   }
 
   a {

@@ -12,7 +12,7 @@ export const usePopulateCharts = (bugsData: IBug[]) => {
   const initialChartsData: IinitialChartsData = {
     priorityData: { low: 0, normal: 0, critical: 0 },
     solvedCount: { notSolvedCount: 0, isSolvedCount: 0 },
-    solvedBy: []
+    solvedBy: [],
   };
   const [chartsData, setChartsData] = useState(initialChartsData);
 
@@ -20,10 +20,10 @@ export const usePopulateCharts = (bugsData: IBug[]) => {
   useEffect(() => {
     let calcData = bugsData.reduce((accu, bug) => {
       // give each assignee an empty object to start with``
-      if (!accu.solvedBy.find(user => user.userName === bug.assignee)) {
+      if (!accu.solvedBy.find((user) => user.userName === bug.assignee)) {
         accu.solvedBy.push({ userName: bug.assignee, solved: 0, pending: 0 });
       }
-      const foundUser = accu.solvedBy.find(user => user.userName === bug.assignee);
+      const foundUser = accu.solvedBy.find((user) => user.userName === bug.assignee);
       if (!bug.solved) {
         foundUser && (foundUser.pending += 1);
       } else {

@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import BugsList from '../components/BugsList';
-const SearchPage:FC<any> = ({
+const SearchPage: FC<any> = ({
   bugsDataState,
   handleGlobalChange,
   handleDeleteBug,
   searchGlobalQuery,
-  bugsDataSearch
+  bugsDataSearch,
 }) => {
   return (
     <>

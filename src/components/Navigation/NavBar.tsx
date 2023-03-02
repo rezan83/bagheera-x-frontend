@@ -3,14 +3,13 @@ import React, { FC, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './navbar.scss';
 interface props {
-  setSearchGlobalQuery:React.Dispatch<React.SetStateAction<string>>
-
+  setSearchGlobalQuery: React.Dispatch<React.SetStateAction<string>>;
 }
-function NavBar ({ setSearchGlobalQuery }:props) {
+function NavBar({ setSearchGlobalQuery }: props) {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState('');
 
-  const searchQuery:React.FormEventHandler<HTMLFormElement> = event => {
+  const searchQuery: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     setSearchGlobalQuery(searchText);
     setSearchText('');
@@ -34,7 +33,7 @@ function NavBar ({ setSearchGlobalQuery }:props) {
 
           <div className="nav-search">
             <form onSubmit={searchQuery}>
-              <button className="btn search-title-btn" >
+              <button className="btn search-title-btn">
                 <span role="img" aria-label="search btn">
                   &#128269;
                 </span>
@@ -44,7 +43,7 @@ function NavBar ({ setSearchGlobalQuery }:props) {
                 name="search-title"
                 value={searchText}
                 placeholder="Title, Description or Assignee"
-                onChange={event => setSearchText(event.target.value)}
+                onChange={(event) => setSearchText(event.target.value)}
               />
             </form>
           </div>
