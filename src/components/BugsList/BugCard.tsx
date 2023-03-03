@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { getPriorityName } from '../../helpers';
 import { IBug } from '../../interfaces';
+import { updateBug, deleteBug } from '../../store/bugsDataSlice';
 
 interface IProps {
-  bug: IBug;
-  handleDeleteBug: (id: string) => void;
-  handleGlobalChange: (editedBug: IBug) => void;
+  bug:IBug
 }
-const BugCard: FC<IProps> = ({ bug, handleDeleteBug, handleGlobalChange }) => {
+const BugCard: FC<IProps> = ({ bug }) => {
+  const dispatch = useDispatch();
   const toggleSolved = () => {
-    handleGlobalChange({ ...bug, solved: !bug.solved });
+    dispatch(updateBug({ ...bug, solved: !bug.solved }));
   };
 
   const handleLocalChange = (event: { target: { name: any; value: any } }) => {
@@ -18,7 +19,7 @@ const BugCard: FC<IProps> = ({ bug, handleDeleteBug, handleGlobalChange }) => {
     if (eventName === 'priority') {
       eventValue = Number(eventValue);
     }
-    handleGlobalChange({ ...bug, [eventName]: eventValue });
+    dispatch(updateBug({ ...bug, [eventName]: eventValue }));
   };
   return (
     <div className={`bug-card bug-priority ${getPriorityName(bug.priority)}  ${bug.solved ? 'solved' : ''}`}>
@@ -39,7 +40,7 @@ const BugCard: FC<IProps> = ({ bug, handleDeleteBug, handleGlobalChange }) => {
         <button className={`btn ${bug.solved ? 'solved' : ''}`} onClick={toggleSolved}>
           {bug.solved ? <span>Solved &#128504;</span> : <span>Solve &#10005;</span>}
         </button>
-        <button className="btn btn-delete" onClick={() => handleDeleteBug(bug.id)}>
+        <button className="btn btn-delete" onClick={() => dispatch(deleteBug(bug.id))}>
           &#128465;
         </button>
       </div>

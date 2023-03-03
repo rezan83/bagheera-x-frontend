@@ -1,14 +1,20 @@
 import React, { FC, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { IBug } from '../../interfaces';
+import { RootState } from '../../store';
+import { populateBugs } from '../../store/bugsDataSlice';
 import './bugform.scss';
 
-interface IProps {
-  bugsDataState: IBug[];
-  setBugsDataState: React.Dispatch<React.SetStateAction<IBug[]>>;
-}
-const BugForm: FC<IProps> = ({ bugsDataState, setBugsDataState }) => {
+// interface IProps {
+//   bugsDataState: IBug[];
+//   setBugsDataState: React.Dispatch<React.SetStateAction<IBug[]>>;
+// }
+const BugForm: FC = () => {
+  // { bugsDataState, setBugsDataState }
+  const bugsDataState = useSelector((state: RootState) => state.bugs.value);
+  const dispatch = useDispatch();
   const [reportSuccess, setReportSuccess] = useState(false);
-  const [newBug, setNewBug] = useState({
+  const [newBug, setNewBug] = useState<IBug>({
     id: '0',
     title: '',
     description: '',
@@ -25,7 +31,7 @@ const BugForm: FC<IProps> = ({ bugsDataState, setBugsDataState }) => {
       newBug.assignee = newBug.reporter;
     }
 
-    setBugsDataState([newBug, ...bugsDataState]);
+    dispatch(populateBugs([newBug, ...bugsDataState]));
     setNewBug({
       id,
       title: '',

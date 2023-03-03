@@ -1,17 +1,18 @@
 import React, { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Link, useNavigate } from 'react-router-dom';
+import { setSearchQuery } from '../../store/bugsDataSlice';
 import './navbar.scss';
-interface props {
-  setSearchGlobalQuery: React.Dispatch<React.SetStateAction<string>>;
-}
-function NavBar({ setSearchGlobalQuery }: props) {
+
+function NavBar() {
+const dispatch = useDispatch()
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState('');
 
   const searchQuery: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    setSearchGlobalQuery(searchText);
+    dispatch(setSearchQuery(searchText));
     setSearchText('');
     navigate('search');
   };

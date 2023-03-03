@@ -3,24 +3,12 @@ import BugForm from '../components/BugForm';
 import BugsList from '../components/BugsList';
 import SortAndFilter from '../components/SortAndFilter';
 
-const Report: FC<any> = ({
-  bugsDataState,
-  setBugsDataState,
-  handleGlobalChange,
-  handleDeleteBug,
-  bugsFilter,
-  setBugsFilter,
-  bugsFilterDataState,
-}) => {
+const Report: FC = () => {
   return (
     <>
-      <BugForm bugsDataState={bugsDataState} setBugsDataState={setBugsDataState} />
-      <SortAndFilter {...{ bugsFilter, setBugsFilter }} />
-      <BugsList
-        bugsDataState={!bugsFilter.set ? bugsDataState : bugsFilterDataState}
-        handleGlobalChange={handleGlobalChange}
-        handleDeleteBug={handleDeleteBug}
-      />
+      <BugForm />
+      <SortAndFilter />
+      <BugsList />
     </>
   );
 };

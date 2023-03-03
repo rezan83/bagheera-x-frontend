@@ -1,5 +1,3 @@
-// uncomment useFetchAllBugs related and comment bugsData to test remot api
-// import { useState, useEffect } from 'react';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Report from './pages/Report';
@@ -9,50 +7,27 @@ import ScrollToTop from './components/Navigation/ScrollToTop';
 import Dashboard from './pages/Dashboard';
 import Loading from './pages/Loading';
 import FetchError from './pages/FetchError';
-
-import { useSearchState } from './hooks/useSearchState';
-import { usePopulateCharts } from './hooks/usePopulateCharts';
-// uncomment useFetchAllBugs related and comment bugsData to test remot api
-// import { bugsData } from './bugsData';
-// uncomment useFetchAllBugs related and comment bugsData to test remot api
 import { useFetchAllBugs } from './hooks/useFetchAllBugs';
-import { IBug } from './interfaces';
-import useFilterSortState from './hooks/useFilterSortState';
+
+import type { RootState } from './store';
+import { useSelector, useDispatch } from 'react-redux';
+import { populateBugs } from './store/bugsDataSlice';
+import { normalizeDataForCharts } from './helpers';
 
 function App() {
-  const { fetchingState, setBugsDataState, bugsDataState } = useFetchAllBugs();
+  const { priorityData, solvedCount, solvedBy } = useSelector((state: RootState) =>
+    normalizeDataForCharts(state.bugs.value),
+  );
+  const dispatch = useDispatch();
 
-  const { bugsFilter, setBugsFilter, bugsFilterDataState, setBugsFilterDataState } = useFilterSortState(bugsDataState);
-  const { priorityData, solvedCount, solvedBy } = usePopulateCharts(bugsDataState);
-  const { searchGlobalQuery, setSearchGlobalQuery, bugsDataSearch, setBugsDataSearch } = useSearchState(bugsDataState);
+  const { fetchingState } = useFetchAllBugs(populateBugs, dispatch);
 
-  const handleGlobalChange = (editedBug: IBug) => {
-    setBugsDataState(bugsDataState.map((bug) => (bug.id === editedBug.id ? { ...bug, ...editedBug } : bug)));
-    if (searchGlobalQuery) {
-      setBugsDataSearch(bugsDataSearch.map((bug) => (bug.id === editedBug.id ? { ...bug, ...editedBug } : bug)));
-    }
-    if (bugsFilter.set) {
-      setBugsFilterDataState(
-        bugsFilterDataState.map((bug) => (bug.id === editedBug.id ? { ...bug, ...editedBug } : bug)),
-      );
-    }
-  };
-  const handleDeleteBug = (id: string) => {
-    setBugsDataState(bugsDataState.filter((bug) => bug.id !== id));
-    if (searchGlobalQuery) {
-      setBugsDataSearch(bugsDataSearch.filter((bug) => bug.id !== id));
-    }
-    if (bugsFilter.set) {
-      setBugsFilterDataState(bugsFilterDataState.filter((bug) => bug.id !== id));
-    }
-  };
   return (
     <div className="App">
       <header className="App-header">
-        <NavBar setSearchGlobalQuery={setSearchGlobalQuery} />
+        <NavBar />
       </header>
       <Routes>
-        {/* // uncomment useFetchAllBugs related and comment bugsData to test remot api */}
         <Route
           path="/"
           element={
@@ -63,37 +38,8 @@ function App() {
             </>
           }
         />
-        <Route
-          path="/report"
-          element={
-            <Report
-              {...{
-                bugsDataState,
-                setBugsDataState,
-                handleGlobalChange,
-                handleDeleteBug,
-                bugsFilter,
-                setBugsFilter,
-                bugsFilterDataState,
-              }}
-            />
-          }
-        />
-        <Route
-          path="/search"
-          element={
-            <SearchPage
-              {...{
-                bugsDataState,
-                setBugsDataState,
-                handleGlobalChange,
-                handleDeleteBug,
-                searchGlobalQuery,
-                bugsDataSearch,
-              }}
-            />
-          }
-        />
+        <Route path="/report" element={<Report />} />
+        <Route path="/search" element={<SearchPage />} />
       </Routes>
 
       <ScrollToTop />

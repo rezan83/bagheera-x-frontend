@@ -1,9 +1,13 @@
-import { useState, useEffect } from 'react';
+import { ActionCreatorWithPayload, AnyAction } from '@reduxjs/toolkit';
+import { useState, useEffect, Dispatch } from 'react';
 import { IBug } from '../interfaces';
 
-export const useFetchAllBugs = () => {
+export const useFetchAllBugs = (
+  populateBugs: ActionCreatorWithPayload<IBug[], 'bugs/populateBugs'>,
+  dispatch: Dispatch<AnyAction>,
+) => {
   // normal fetched data
-  const [bugsDataState, setBugsDataState] = useState<IBug[]>([]);
+  // const [bugsDataState, setBugsDataState] = useState<IBug[]>([]);
   const [fetchingState, setFetchingState] = useState({
     isLoading: true,
     isError: false,
@@ -29,9 +33,9 @@ export const useFetchAllBugs = () => {
         }
         return res.json();
       })
-      .then((data) => {
+      .then((data: IBug[]) => {
         setFetchingState({ isReady: !!data.length, isLoading: false, isError: false });
-        setBugsDataState(data);
+        dispatch(populateBugs(data));
       })
       .catch((error) => {
         console.log(error);
@@ -42,7 +46,7 @@ export const useFetchAllBugs = () => {
 
   return {
     fetchingState,
-    bugsDataState,
-    setBugsDataState,
+    // bugsDataState,
+    // setBugsDataState,
   };
 };

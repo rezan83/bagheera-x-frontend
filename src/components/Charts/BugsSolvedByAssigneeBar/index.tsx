@@ -41,11 +41,13 @@ const BugsSolvedByAssigneeBar: FC<IProps> = ({ solvedBy }) => {
     series: [
       {
         name: 'Solved',
+        stack: 'total',
         type: 'bar',
         data: solvedBy.map((assignee) => assignee.solved),
       },
       {
         name: 'Pending',
+        stack: 'total',
         type: 'bar',
         data: solvedBy.map((assignee) => assignee.pending),
       },

@@ -1,46 +1,43 @@
 import React, { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { setBugsFilter } from '../../store/bugsDataSlice';
 import './sortAndFilter.scss';
-interface IProps {
-  bugsFilter: {
-    sortPriority: number;
-    showSolved: boolean;
-    set: boolean;
-  };
-  setBugsFilter: React.Dispatch<
-    React.SetStateAction<{
-      sortPriority: number;
-      showSolved: boolean;
-      set: boolean;
-    }>
-  >;
-}
-const SortAndFilter: FC<IProps> = ({ bugsFilter, setBugsFilter }) => {
+
+const SortAndFilter: FC = () => {
+  const bugsFilter = useSelector((state: RootState) => state.bugs.bugsFilter);
+  const dispatch = useDispatch();
+
   const handelShowSolved = () => {
-    setBugsFilter((bugsFilter) => ({
-      ...bugsFilter,
-      showSolved: !bugsFilter.showSolved,
-      set: true,
-    }));
+    dispatch(
+      setBugsFilter({
+        ...bugsFilter,
+        showSolved: !bugsFilter.showSolved,
+        active: true,
+      }),
+    );
   };
-  const handelSortPriority = () => {
-    setBugsFilter((bugsFilter) => ({
-      ...bugsFilter,
-      sortPriority: -bugsFilter.sortPriority,
-      set: true,
-    }));
+  const handelsortOrder = () => {
+    dispatch(
+      setBugsFilter({
+        ...bugsFilter,
+        sortOrder: -bugsFilter.sortOrder,
+        active: true,
+      }),
+    );
   };
   const handelFilterReset = () => {
-    setBugsFilter({ sortPriority: 1, showSolved: true, set: false });
+    dispatch(setBugsFilter({ sortOrder: 1, showSolved: true, active: false }));
   };
   return (
     <div className="sort-and-filter">
-      <button className={bugsFilter.set ? 'filter-reset' : ''} onClick={handelFilterReset}>
-        Reset All {bugsFilter.set ? '' : <span>&#128504;</span>}
+      <button className={bugsFilter.active ? 'filter-reset' : ''} onClick={handelFilterReset}>
+        Reset All {bugsFilter.active ? '' : <span>&#128504;</span>}
       </button>
-      <button className={bugsFilter.set ? '' : 'filter-reset'} onClick={handelSortPriority}>
-        Priority: {bugsFilter.sortPriority > 0 ? <span>&uarr;</span> : <span>&darr;</span>}
+      <button className={bugsFilter.active ? '' : 'filter-reset'} onClick={handelsortOrder}>
+        Priority: {bugsFilter.sortOrder > 0 ? <span>&uarr;</span> : <span>&darr;</span>}
       </button>
-      <button className={bugsFilter.set ? '' : 'filter-reset'} onClick={handelShowSolved}>
+      <button className={bugsFilter.active ? '' : 'filter-reset'} onClick={handelShowSolved}>
         Solved: {bugsFilter.showSolved ? 'Showen' : 'Hidden'}
       </button>
     </div>
