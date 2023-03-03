@@ -9,22 +9,21 @@ Vite + React + TypeScript with pre-configured ESLint (with Airbnb JS/React rules
 ![ESLint](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
 ![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
 
-![Screenshot](https://i.ibb.co/Trm88qJ/screenshot.png)
+![Screenshot](/src/images/Screenshot%202023-03-03.png)
 
 ## Features
 
-- 🦾 Up to date libraries version and their features
-- 🔎 Pre-configured and extensible ESLint configuration without wrong and unused rules designed for old React versions
-- 💅 Pre-configured and extensible Prettier configuration
-- 🔬 Git hooks for code formatting and linting pre-commit
+- 🦾 Report bugs and issues
+- 🔎 Search bugs by title, description and assignee
+- 💅 Change assignee, priority and solved state
+- 🔬 Filter and sort bugs based on priority and solved state
+- 📊 Visualization showing different attribute of the bugs
 
 ## Usage
 
-git init
-
 yarn install
 
-yarn dev
+yarn start
 ```
 
 ## Available commands
@@ -32,7 +31,7 @@ yarn dev
 Run in development mode
 
 ```bash
-  yarn dev
+  yarn start
 ```
 
 Create production build
